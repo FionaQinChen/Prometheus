@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: traefik-default-ingress
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+spec:
+  tls:
+    - secretName: traefik-ssl
+  rules:
+  - host: prometheus.local  # 替换成你的域名
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: prometheus
+          servicePort: 9090
